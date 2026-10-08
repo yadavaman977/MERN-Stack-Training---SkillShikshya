@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>My portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <main>
+      <!-- header -->
+      <header class="header">
+        <div class="logo">
+          <h1>Aman Yadav</h1>
+        </div>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="#home"><i class="fa-regular fa-house"></i>Home</a></li>
+            <li><a href="#about"><i class="fa-regular fa-circle-user"></i>About</a></li>
+            <li><a href="#projects"><i class="fa-solid fa-diagram-project"></i>Projects</a></li>
+            <li><a href="#skills"><i class="fa-solid fa-computer"></i>Skills</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-address-book"></i>Contact</a></li>
+          </ul>
+        </nav>
+        <div class="buttons">
+          <button class="login button">Login</button>
+          <button class="download button">Downlaod CV</button>
+        </div>
+      </header>
+
+      <!-- home -->
+      <section id="home" class="home">
+        <h2>Hi, I am Aman Yadav <span>Frontend Developer</span></h2>
+        <img src="./img/images.jpg" alt="My Profile Image" />
+      </section>
+
+      <!-- About -->
+      <section id="about" class="about">
+        <div class="about-content">
+          <h2>Hi, I'm Aman Kumar Yadav</h2>
+
+          <p>
+            I’m a passionate Frontend Developer focused on creating clean,
+            responsive, and user-friendly websites.
+          </p>
+ 
+          <p>
+            I’m currently learning HTML, CSS, JavaScript, and React through
+            practical projects.
+          </p>
+
+          <p>
+            I enjoy learning new technologies and turning ideas into modern web
+            experiences.
+          </p>
+
+          <a href="#contact" class="btn">Let's Connect</a>
+        </div>
+
+        <div class="about-image">
+          <img src="./img/images.jpg" alt="Aman Kumar Yadav" />
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="projects">
+        <h2>My Projects</h2>
+
+        <div class="projects-container">
+          <div class="project-card">
+            <img src="./img/calculator.png" alt="Calculator Project" />
+            <h3>Calculator</h3>
+            <p>
+              A simple and responsive calculator built using HTML, CSS, and
+              JavaScript.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <img src="./img/ecommerce.png" alt="E-Commerce Website" />
+            <h3>E-Commerce Website</h3>
+            <p>
+              An online shopping website with products, cart, and user-friendly
+              interface.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <img src="./img/pharmaconnect.png" alt="PharmaConnect Project" />
+            <h3>PharmaConnect</h3>
+            <p>
+              A multi-vendor pharmacy management system connecting customers,
+              pharmacies, and admins.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <img src="./img/port.png" alt="Portfolio Website" />
+            <h3>Personal Portfolio</h3>
+            <p>
+              A responsive portfolio website showcasing my skills, projects,
+              education, and contact information.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- skills  -->
+      <section id="skills" class="skills">
+        <h2>My Skills</h2>
+        <div class="skill-container">
+          <div class="skill-card">
+            <h2>HTML</h2>
+            <img src="./img/html.png" alt="html image" />
+          </div>
+          <div class="skill-card">
+            <h2>CSS</h2>
+            <img src="./img/css.png" alt="css image" />
+          </div>
+          <div class="skill-card">
+            <h2>Java Script</h2>
+            <img src="./img/js.png" alt="js image" />
+          </div>
+          <div class="skill-card">
+            <h2>Tailwind</h2>
+            <img src="./img/tailwind.png" alt="tailwind image" />
+          </div>
+          <div class="skill-card">
+            <h2>React</h2>
+            <img src="./img/react.png" alt="react image" />
+          </div>
+        </div>
+      </section>
+
+      <!-- contact  -->
+      <section id="contact" class="contact">
+        <form novalidate>
+          <h2>Contact Me</h2>
+          <fieldset>
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                minlength="3"
+                maxlength="20"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+              />
+            </div>
+
+            <div class="field">
+              <label for="age">Age</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                min="1"
+                max="100"
+                placeholder="Enter Your Age"
+              />
+            </div>
+
+            <div class="field">
+              <label for="tel">Telephone:</label>
+              <input
+                type="tel"
+                id="tel"
+                name="tel"
+                required
+                placeholder="Enter Your Telephone Number"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              /><br /><br />
+            </div>
+
+            <!-- country -->
+            <div class="field">
+              <label for="country">Country:</label>
+              <select id="country" name="country">
+                <option value selected>Select your country</option>
+                <option value="nepal">Nepal</option>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="uk">UK</option>
+                <option value="australia">Australia</option>
+              </select>
+            </div>
+
+            <!-- address -->
+
+            <div class="field">
+              <label for="address">Address:</label>
+              <textarea
+                id="address"
+                name="address"
+                required
+                placeholder="Enter Your Address"
+              ></textarea>
+            </div>
+
+            <!-- message -->
+
+            <div class="field">
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Enter Your Message"
+              ></textarea>
+            </div>
+
+            <div class="actions">
+              <button type="reset">Reset</button>
+              <button type="submit">Submit</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <footer>
+        <h3>Aman Kumar Yadav</h3>
+        <p>Frontend Developer</p>
+
+        <div class="social-links">
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+        </div>
+
+        <hr />
+
+        <p>© 2026 Aman Kumar Yadav. All Rights Reserved.</p>
+      </footer>
+    </main>
+  </body>
+</html>

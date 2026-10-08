@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+   form{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+   }
+   fieldset{
+    color: black;
+   }
+   legend{
+    text-align: center;
+   }
+   input{
+    outline: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+   }
+
+   
+</style>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>Personal Information</legend>
+        <!-- name -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter Your Name" minlength="2" maxlength="100"><br><br>
+        <!-- email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Enter Your Email"><br><br>
+        <!-- age -->
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required placeholder="Enter Your Age" min="0" max="120"><br><br>
+        <!-- telephone -->
+        <label for="tel">Telephone:</label>
+        <input type="tel" id="tel" name="tel" required placeholder="Enter Your Telephone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+        <!-- password -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter Your Password"><br><br>
+        <!-- date of birth -->
+        <label for="dateofbirth">Date of Birth:</label>
+        <input type="date" id="dateofbirth" name="dateofbirth" required><br><br>
+        <!-- gender -->
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required> Male
+        <input type="radio" id="female" name="gender" value="female" required> Female <br><br>
+        <!-- address -->
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" cols="50" required placeholder="Enter Your Address"></textarea><br><br>
+        <!-- hobbies -->
+        <label for="hobbies">Hobbies:</label>
+        <input type="checkbox" id="hobbies" name="hobbies" value="Reading"> Reading
+        <input type="checkbox" id="hobbies" name="hobbies" value="Traveling"> Traveling
+        <input type="checkbox" id="hobbies" name="hobbies" value="Cooking"> Cooking
+        <input type="checkbox" id="hobbies" name="hobbies" value="Sports"> Sports
+        <input type="checkbox" id="hobbies" name="hobbies" value="Music"> Music
+        <br><br>
+        <!-- profile picture -->
+
+        <label for="profile-pic">Profile Picture:</label>
+        <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+        <br><br>
+        <!-- country -->
+
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+            <option value="" selected>Select your country</option>
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="uk">UK</option>
+            <option value="australia">Australia</option>
+        </select>
+        <br><br>
+        <!-- favcolor -->
+
+        <label for="favcolor">Favorite Color:</label>
+        <input type="color" id="favcolor" name="favcolor"><br><br> 
+         <!--range -->
+        <label for="range">Select a range:</label>
+        <input type="range" id="range" name="range" min="0" max="100"><br><br>
+        <!-- reset -->
+        <label for="reset">Reset Form:</label>
+        <input type="reset" id="reset" name="reset" value="Reset"><br><br>
+        <!-- submit -->
+        <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <div class="container">
+        <h1>Todo List</h1>
+        <input type="text" id="todoInput" placeholder="Enter a task">
+        <button id="addButton">Add</button>
+        <ul id="todoList"></ul>
+      </div>
+</body>
+
+<script>
+    let tasks = JSON.parse(localStorage.getItem("todo")) || [];
+
+    const todoInput = document.getElementById("todoInput");
+    const addButton = document.getElementById("addButton");
+    const todoList = document.getElementById("todoList");
+
+addButton.addEventListener("click", function() {
+  const task = todoInput.value;
+  if (task) {
+    tasks.push({
+        id: tasks.length + 1,
+        text: task,
+        time: new Date().toLocaleString()
+    });
+    localStorage.setItem("todo", JSON.stringify(tasks));
+    todoInput.value = "";
+    renderTask();
+  }
+})
+
+   function renderTask(){
+       todoList.innerHTML = "";
+        tasks.forEach((item)=>{
+            todoList.innerHTML += `
+            <li>
+                <span>${item.text}</span>
+                <span>${item.time}</span>
+                <button onclick="deleteTask(${item.id})">Delete</button>
+            </li>
+            `
+        })
+   }
+
+   function deleteTask(id){
+       tasks = tasks.filter((task) => task.id !== id);
+       localStorage.setItem("todo", JSON.stringify(tasks));
+       renderTask();
+   }
+</script>
+</html>

@@ -1,0 +1,182 @@
+/* ========================================
+   GLOBAL STYLES & RESET
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ========================================
+   CONTAINER STYLING
+   ======================================== */
+
+.container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ========================================
+   HEADING STYLES
+   ======================================== */
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* ========================================
+   INPUT & BUTTON STYLES
+   ======================================== */
+
+#todoInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Input focus effect */
+#todoInput:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+}
+
+#addButton {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+/* Button hover effect */
+#addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Button active effect */
+#addButton:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   TODO LIST STYLES
+   ======================================== */
+
+#todoList {
+  list-style: none;
+}
+
+/* Individual todo item */
+li {
+  background: #f5f5f5;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for list items */
+li:hover {
+  background: #efefef;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+}
+
+/* Task text styling */
+li span:first-child {
+  flex: 1;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Time stamp styling */
+li span:last-of-type {
+  color: #999;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ========================================
+   DELETE BUTTON STYLES
+   ======================================== */
+
+li button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Delete button hover effect */
+li button:hover {
+  background: #ff5252;
+  transform: scale(1.05);
+  box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (Mobile)
+   ======================================== */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  li {
+    flex-wrap: wrap;
+  }
+
+  li span:last-of-type {
+    width: 100%;
+    margin-top: 8px;
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Clock</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+        }
+
+        #clock {
+           
+/* From https://css.glass */
+background: rgba(102, 20, 255, 0.79);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(0px);
+-webkit-backdrop-filter: blur(0px);
+border: 1px solid rgba(102, 20, 255, 0.38);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="clock">00:00:00</h1>
+
+    <script>
+        const clock = document.getElementById("clock");
+
+        function showTime() {
+            const now = new Date();
+
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(showTime, 1000);
+    </script>
+
+</body>
+</html>

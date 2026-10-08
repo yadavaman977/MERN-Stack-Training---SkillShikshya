@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+</head>
+
+<style>
+    .box{
+        width: 100px;
+        height: 100px;
+        border: 2px solid black;
+        position: absolute;
+        animation: move 2s infinite ease-in-out;
+
+    }
+
+  /* @keyframes move {
+  0% {
+    top: 0;
+    left: 0;
+  }
+
+  25% {
+    top: 0;
+    left: 200px;
+  }
+
+  50% {
+    top: 200px;
+    left: 200px;
+  }
+
+  75% {
+    top: 200px;
+    left: 0;
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+  }
+} */
+
+
+ @keyframes move {
+  0% {
+    transform: translate(0, 0);
+    background-color: black;
+  }
+
+  25% {
+    transform: translate(200px, 0);
+    background-color: red;
+  }
+
+  50% {
+    transform: translate(200px, 200px);
+    background-color: green;
+  }
+
+  75% {
+    transform: translate(0, 200px);
+    background-color: yellow;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    background-color: brown;
+  }
+}
+/* .box{
+
+    animation: blur 2s infinite ease-in-out;
+
+}
+
+@keyframes blur {
+      from {
+        filter: blur(10px);
+      }
+      to {
+        filter: blur(0px);
+      }
+    }
+     */
+</style>
+<body>
+    <div class="box">
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Table</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #173f45;
+            background-color: #e7f2f0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(23, 63, 69, 0.7);
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .user-form {
+            width: min(100%, 500px);
+            padding: 24px;
+            border: 2px solid #173f45;
+            border-radius: 14px;
+            background-color: #fffaf0;
+            box-shadow: 0 14px 30px rgba(23, 63, 69, 0.3);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .form-row label {
+            width: 110px;
+            font-weight: bold;
+        }
+
+        .form-row input {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #8bb7b1;
+            border-radius: 6px;
+            color: #173f45;
+            background-color: #ffffff;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: 0.85;
+        }
+
+        .button-blue {
+            background-color: #177e89;
+        }
+
+        .button-green {
+            background-color: #e07856;
+        }
+
+        .button-red {
+            background-color: #bd4b4b;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 22px;
+            border-radius: 14px;
+            background-color: #173f45;
+            box-shadow: 0 8px 18px rgba(23, 63, 69, 0.18);
+        }
+
+        h1 {
+            flex: 1;
+            margin: 0;
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 1px;
+            color: #fffaf0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #fffaf0;
+            box-shadow: 0 8px 18px rgba(23, 63, 69, 0.15);
+        }
+
+        th,
+        td {
+            padding: 12px 8px;
+            border: 1px solid #c4d8d4;
+            text-align: center;
+        }
+
+        th {
+            color: #ffffff;
+            background-color: #26727a;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f4fbf9;
+        }
+
+        tbody tr:hover {
+            background-color: #ffe8dc;
+        }
+
+        .user-email,
+        .user-website {
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .action-buttons {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 16px;
+            }
+
+            .page-header {
+                flex-wrap: wrap;
+            }
+
+            h1 {
+                flex-basis: 100%;
+                order: -1;
+                font-size: 30px;
+            }
+
+            .form-row {
+                display: block;
+            }
+
+            .form-row label {
+                display: block;
+                width: auto;
+                margin-bottom: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="forms-Data" class="modal">
+    <form id="form" class="user-form">
+        <div class="form-row">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Your Name">
+        </div>
+        <div class="form-row">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Your Username">
+        </div>
+        <div class="form-row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Your Email">
+        </div>
+        <div class="form-row">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" placeholder="Your Phone">
+        </div>
+        <div class="form-row">
+            <label for="website">Website:</label>
+            <input type="text" id="website" placeholder="Your Website">
+        </div>
+        <div class="form-actions">
+             <button class="button button-blue" id="cancel" type="button">Cancel</button>
+        <button class="button button-green" type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+    
+            <div>
+                <div class="page-header">
+                    <h1>Users Table</h1>
+                    <button id="showAdd" class="button button-blue">Add User</button>
+                       </div>
+                    <div class="table-wrapper">
+                    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    </div>
+    </div>
+</body>
+
+<script>
+    const tbody = document.getElementById("tbody");
+    let users= []
+    const modal = document.getElementById("forms-Data");
+    const showAdd = document.getElementById("showAdd");
+    const name = document.getElementById("name");
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const website = document.getElementById("website");
+    let editing = null;
+
+    function renderUser(){
+       tbody.innerHTML = "";
+       users.forEach((user)=> {
+            tbody.innerHTML += `<tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.username}</td>
+            <td class="user-email">${user.email}</td>
+            <td>${user.phone}</td>
+            <td class="user-website">${user.website}</td>
+            <td>
+                <div class="action-buttons">
+                <button class="button button-blue" onclick="editUser(${user.id})">Edit</button>
+                <button class="button button-red" onclick="deleteUser(${user.id})">Delete</button>
+               </div>
+                </td>
+            </tr>`
+       })
+    }
+
+    function userData(){
+        return{
+            name: name.value,
+            username: username.value,
+            email: email.value,
+            phone: phone.value,
+            website: website.value
+        }
+    }
+     
+    showAdd.addEventListener("click", () => {
+        modal.classList.add("visible");
+    })
+    const cancel = document.getElementById("cancel");
+    cancel.addEventListener("click", () => {
+        modal.classList.remove("visible");
+    })
+   
+    async function getUsers(){
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data= await res.json();
+          users = data;
+          renderUser(); 
+    }
+     async function addUser(user) {
+         const  res = await fetch("https://jsonplaceholder.typicode.com/users", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify(user)
+         })
+         const data = await res.json();
+         users.push(data);
+         renderUser();
+         modal.classList.remove("visible");
+     }
+         
+     function editUser(id){
+        const user = users.find((user) => user.id === id);
+        name.value = user.name;
+        username.value = user.username;
+        email.value = user.email;
+        phone.value = user.phone;
+        website.value = user.website;
+        editing = id;
+        modal.classList.add("visible");
+     }
+   async function updateUser(){
+    const user = userData();
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${editing}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user)
+    })
+    const data = await res.json();
+    const index = users.findIndex((user) => user.id === editing);
+    users[index] = data;
+    renderUser();
+    modal.classList.remove("visible");
+    editing = null;
+   }
+   async function deleteUser(id){
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        method: "DELETE"
+    })
+    users = users.filter((user) => user.id !== id);
+    renderUser();
+   }
+     
+     
+    const form = document.getElementById("form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if(editing){
+            updateUser(editing);
+        }
+        else{
+            addUser(userData());
+        }   
+        
+    })
+    getUsers();
+</script>
+</html>

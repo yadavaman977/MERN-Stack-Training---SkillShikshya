@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+  </head>
+  <style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #111827;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #clock {
+        color: white;
+        font-size: 60px;
+        font-family: monospace;
+    }
+</style>
+  <body>
+    <h1 id="clock">00:00:00</h1>
+  </body>
+  <script>
+    const clock = document.getElementById("clock");
+
+function showTime() {
+
+    const now = new Date();
+
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    let ampm;
+
+    if (hours >= 12) {
+        ampm = "PM";
+    } else {
+        ampm = "AM";
+    }
+
+    if (hours === 0) {
+        hours = 12;
+    } else if (hours > 12) {
+        hours = hours - 12;
+    }
+
+    const formattedHours = String(hours).padStart(2, "0");
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+
+    clock.textContent =
+        formattedHours + ":" +
+        formattedMinutes + ":" +
+        formattedSeconds + " " +
+        ampm;
+}
+
+    showTime();
+
+    setInterval(showTime, 1000);
+  </script>
+</html>

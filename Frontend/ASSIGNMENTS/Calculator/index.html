@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    /* Reset basic spacing so layout starts clean */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Center the calculator on the page */
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #eef3ff, #dfe8ff);
+        font-family: Arial, sans-serif;
+    }
+
+    /* Main calculator container */
+    .container {
+        width: 320px;
+        background: #ffffff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+        border: 1px solid #dfe7f5;
+    }
+
+    /* Display screen styling */
+    .display {
+        background: #111827;
+        padding: 18px 14px;
+    }
+
+    input {
+        width: 100%;
+        height: 60px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #ffffff;
+        text-align: right;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    /* Grid layout for calculator buttons */
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: #e4ebf7;
+        padding: 1px;
+    }
+
+    /* Default button style */
+    .button {
+        padding: 22px 10px;
+        border: none;
+        background: #f8fafc;
+        color: #1f2937;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    /* Button hover effect */
+    .button:hover {
+        background: #edf3ff;
+    }
+
+    /* Button press effect */
+    .button:active {
+        transform: scale(0.98);
+    }
+
+    /* Operator buttons in orange */
+    .button:nth-child(4n) {
+        background: #ffb703;
+        color: #ffffff;
+    }
+
+    .button:nth-child(4n):hover {
+        background: #f5a600;
+    }
+
+    /* Make the zero button wider */
+    .button:nth-child(17) {
+        grid-column: span 2;
+        background: #eef4ff;
+    }
+
+    .button:nth-child(17):hover {
+        background: #e3edff;
+    }
+
+    /* Equal button green */
+    .button:nth-child(19) {
+        background: #22c55e;
+        color: #ffffff;
+    }
+
+    .button:nth-child(19):hover {
+        background: #16a34a;
+    }
+</style>
+<body>
+       <div class="container">
+
+        <div class="display">
+            <input type="text" placeholder="0" id="display">
+        </div>
+
+        <div class="buttons">
+            <button  class="button">AC</button>
+            <button class="button">DEL</button>
+            <button class="button">%</button>
+            <button class="button">/</button>
+            <button class="button">7</button>
+            <button class="button">8</button>
+            <button class="button">9</button>
+            <button class="button">*</button>
+            <button class="button">4</button>
+            <button class="button">5</button>
+            <button class="button">6</button>
+            <button class="button">-</button>
+            <button class="button">1</button>
+            <button class="button">2</button>
+            <button class="button">3</button>
+            <button class="button">+</button>
+            <button class="button">0</button>
+            <button class="button">.</button>
+            <button class="button">=</button>
+        </div>
+       </div>
+</body>
+  <script>
+    // Get the input field where the calculator result is shown
+    const display = document.getElementById("display");
+
+    // Select all calculator buttons
+    const buttons = document.querySelectorAll(".button");
+
+    // Add click event to each button
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.textContent;
+
+        // Clear the display when AC is pressed
+        if (value === "AC") {
+            display.value = "";
+        }
+        // Remove the last character when DEL is pressed
+        else if (value === "DEL") {
+            display.value = display.value.slice(0, -1);
+        }
+        // Evaluate the expression when = is pressed
+        else if (value === "=") {
+          try {
+            display.value = eval(display.value);
+          } catch (error) {
+            display.value = "Error";
+          }
+        }
+        // Add any other button value to the display
+        else {
+          display.value += value;
+        }
+      });
+    });
+  </script>
+</html>

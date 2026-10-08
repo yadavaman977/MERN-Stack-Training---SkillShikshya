@@ -1,0 +1,60 @@
+* {
+  margin: 0; /* Remove default outside space */
+  padding: 0; /* Remove default inside space */
+  box-sizing: border-box; /* Include padding & border in width/height & Keep width/height fixed */
+}
+
+
+
+
+/* Navbar css start */
+
+nav {
+  display: flex; /* Put items in one row */
+  justify-content: space-between; /* Push items to opposite sides */
+  align-items: center; /* Center items vertically */
+  height: 80px; /* nav-bar height */
+  padding: 24px 112px; /* top/bottom left/right */
+  box-shadow: 0 2px 8px #ddd; /*horizontal, vertical, blur, shadow color */
+  gap: 50px;
+}
+
+ul {
+  display: flex; /* Put all <li> items in a row */
+  align-items: center; /* Align items vertically in the center */
+  list-style: none; /* Remove bullet points */
+  gap: 25px; /* space between each item */
+}
+
+ul li a {
+  color: black; /* Text color = black */
+  text-decoration: none; /* Remove underline */
+}
+
+button {
+  background: #1a9670; /* Button background color */
+  color: white; /* Button text color */
+  padding: 8px; /* Space inside button */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* navbar css end */
+
+.hero-section{
+  height: 775px;
+  box-shadow: 0 2px 8px #ddd; 
+}
+
+.hero{
+  height: 395px;
+}
+
+
+
+
+
+
+
+
+
+

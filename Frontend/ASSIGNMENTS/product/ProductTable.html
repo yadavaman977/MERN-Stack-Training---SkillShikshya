@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Table</title>
+    <style>
+        /* Make width and height easier to control for every element. */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Basic style for the whole page. */
+        body {
+            margin: 0;
+            padding: 32px;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #173f45;
+            background-color: #e7f2f0;
+        }
+
+        /* The dark layer behind the add/edit form. */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(23, 63, 69, 0.7);
+        }
+
+        /* JavaScript adds this class when the form should be visible. */
+        .modal.visible {
+            display: flex;
+        }
+
+        /* White box that contains the product form. */
+        .product-form {
+            width: min(100%, 500px);
+            padding: 24px;
+            border: 2px solid #173f45;
+            border-radius: 14px;
+            background-color: #fffaf0;
+            box-shadow: 0 14px 30px rgba(23, 63, 69, 0.3);
+        }
+
+        /* Put each form label and input on the same line. */
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* Give labels a fixed width so all inputs line up. */
+        .form-row label {
+            width: 110px;
+            font-weight: bold;
+        }
+
+        /* Style all form inputs and the product search box. */
+        .form-row input,
+        #search {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #8bb7b1;
+            border-radius: 6px;
+            color: #173f45;
+            background-color: #ffffff;
+        }
+
+        /* Keep the Cancel and Submit buttons together. */
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        /* Common style shared by every button. */
+        .button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Make a button slightly lighter when the mouse is over it. */
+        .button:hover {
+            opacity: 0.85;
+        }
+
+        /* Different colors help users understand each button action. */
+        .button-blue {
+            background-color: #177e89;
+        }
+
+        .button-green {
+            background-color: #e07856;
+        }
+
+        .button-gray {
+            background-color: #4f7478;
+        }
+
+        .button-red {
+            background-color: #bd4b4b;
+        }
+
+        /* Top area containing the page title, search, and add button. */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 22px;
+            border-radius: 14px;
+            background-color: #173f45;
+            box-shadow: 0 8px 18px rgba(23, 63, 69, 0.18);
+        }
+
+        /* Main page heading. */
+        h1 {
+            flex: 1;
+            margin: 0;
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 1px;
+            color: #fffaf0;
+        }
+
+        /* Allow the wide table to scroll on small screens. */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        /* Main product table. */
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #fffaf0;
+            box-shadow: 0 8px 18px rgba(23, 63, 69, 0.15);
+        }
+
+        /* Space and borders for table headings and cells. */
+        th,
+        td {
+            padding: 12px 8px;
+            border: 1px solid #c4d8d4;
+            text-align: center;
+        }
+
+        /* Color the table heading row. */
+        th {
+            color: #ffffff;
+            background-color: #26727a;
+        }
+
+        /* Use a different color on every second row for easier reading. */
+        tbody tr:nth-child(even) {
+            background-color: #f4fbf9;
+        }
+
+        /* Highlight the row currently under the mouse. */
+        tbody tr:hover {
+            background-color: #ffe8dc;
+        }
+
+        /* Shorten long product text instead of breaking the table layout. */
+        .product-name,
+        .product-description {
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product-name {
+            max-width: 150px;
+        }
+
+        /* Keep product images the same size. */
+        .product-image {
+            display: block;
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            object-fit: contain;
+        }
+
+        /* Keep action buttons on one line. */
+        .action-buttons {
+            white-space: nowrap;
+        }
+
+        /* Small-screen layout changes. */
+        @media (max-width: 700px) {
+            body {
+                padding: 16px;
+            }
+
+            .page-header {
+                flex-wrap: wrap;
+            }
+
+            h1 {
+                flex-basis: 100%;
+                order: -1;
+                font-size: 30px;
+            }
+
+            #search {
+                flex: 1;
+            }
+
+            .form-row {
+                display: block;
+            }
+
+            .form-row label {
+                display: block;
+                width: auto;
+                margin-bottom: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="forms-Data" class="modal">
+    <form id="form" class="product-form">
+        <div class="form-row">
+            <label for="title">Title:</label>
+            <input type="text" id="title" placeholder=" title">
+        </div>
+        <div class="form-row">
+            <label for="description">Description:</label>
+            <input type="text" id="description" placeholder=" description">
+        </div>
+        <div class="form-row">
+            <label for="price">Price:</label>
+            <input type="number" id="price" placeholder=" price">
+        </div>
+        <div class="form-row">
+            <label for="category">Category:</label>
+            <input type="text" id="category" placeholder=" category">
+        </div>
+        <div class="form-row">
+            <label for="image">Image:</label>
+            <input type="text" id="image" placeholder=" image">
+        </div>
+        <div class="form-actions">
+             <button class="button button-blue" id="cancel" type="button">Cancel</button>
+        <button class="button button-green" type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+    
+            <div>
+                <div class="page-header">
+                    <h1>Product Table</h1>
+                    <input type="search" id="search" placeholder="search product by name" />
+                    <button id="showAdd" class="button button-blue">Add Product</button>
+                       </div>
+                    <div class="table-wrapper">
+                    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    </div>
+    </div>
+</body>
+
+<script>
+    // This array stores all products received from the API.
+    let products = [];
+
+    // Get the HTML elements that JavaScript needs to use.
+    const tbody = document.getElementById("tbody");
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const price = document.getElementById("price");
+    const category = document.getElementById("category");
+    const image = document.getElementById("image");
+    const form = document.getElementById("form");
+    const modal = document.getElementById("forms-Data");
+    const showAdd = document.getElementById("showAdd");
+    const cancel = document.getElementById("cancel");
+    let editing = null;
+    const search = document.getElementById("search");
+
+    // Show products in the table. This function also applies the search text.
+    function renderProducts(){
+        // Keep only products whose title includes the search value.
+        let searchText = search.value.toLowerCase();
+        let filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchText));
+
+        // Show the newest product first.
+        filteredProducts.sort((a ,b)=> b.id - a.id);
+
+        // Clear the old rows before creating new rows.
+        tbody.innerHTML= "";
+
+        // Create one table row for every filtered product.
+        filteredProducts.forEach((product)=>{
+            tbody.innerHTML += `<tr>
+                <td>${product.id}</td>
+                <td class="product-name">${product.title}</td>
+                <td class="product-description">${product.description}</td>
+                <td>${product.price}</td>
+                <td>${product.category}</td>
+                <td><img class="product-image" src="${product.image}" alt="${product.title}" /> </td>
+                <td>
+                <div class="action-buttons">
+                <button class="button button-gray" onclick="viewProduct(${product.id})">View</button>
+                <button class="button button-blue" onclick="editProduct(${product.id})">Edit</button>
+                <button class="button button-red" onclick="deleteProduct(${product.id})">Delete</button>
+                </div>
+                </td>
+                 </tr>
+                `
+        })
+    }
+
+    // Read the values entered in the form and return them as an object.
+    function getData(){
+        return {
+            title: title.value,
+            description: description.value,
+            price: price.value,
+            category: category.value,
+            image: image.value
+        }
+    }
+
+    // Get the starting list of products from the Fake Store API.
+    async function getProducts(){
+        // fetch() sends a request to the API.
+        const res = await fetch("https://fakestoreapi.com/products");
+
+        // json() changes the response into a JavaScript array.
+        const data = await res.json();
+
+        // Save the products and then display them on the page.
+        products = data;
+        renderProducts();
+    }
+
+    // Re-render the table whenever the user types in the search box.
+    search.addEventListener("input", renderProducts);
+
+    // Open the form when the user clicks Add Product.
+    showAdd.addEventListener("click", function(){
+        modal.classList.add("visible");
+    })
+
+    // Close the form when the user clicks Cancel.
+    cancel.addEventListener("click", function(){
+        modal.classList.remove("visible");
+    })
+
+    // Send a new product to the API and add it to the table.
+    async function addProduct(product){
+        // POST means that we want to create a new product.
+        const res = await fetch("https://fakestoreapi.com/products", {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify(product)
+        })
+
+        // Read the product returned by the API.
+        const data = await res.json();
+
+        // Add the new product to our local array and refresh the table.
+        products.push(data);
+        renderProducts();
+        modal.classList.remove("visible");
+    }
+
+    // Save one product and open its details page.
+    function viewProduct(id){
+        const product = products.find((product) => product.id === id);
+        sessionStorage.setItem("viewProduct", JSON.stringify(product));
+        window.location.href = "ProductView.html";
+    }
+
+    // Put the selected product values into the form for editing.
+    function editProduct(id){
+        const product = products.find((product) => product.id === id);
+        title.value = product.title;
+        description.value = product.description;
+        price.value = product.price;
+        category.value = product.category;
+        image.value = product.image;
+        editing = id;
+        modal.classList.add("visible");
+    }
+
+    // Send the edited product to the API and update the table.
+    async function updateProduct(){
+        const product = getData();
+
+        // PUT means that we want to replace an existing product.
+        const res = await fetch(`https://fakestoreapi.com/products/${editing}`, {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify(product)
+        })
+
+        // Get the updated product from the API.
+        const data = await res.json();
+
+        // Find the old product in the array and replace it.
+        const index = products.findIndex((product) => product.id === editing);
+        products[index] = data;
+        renderProducts();
+        modal.classList.remove("visible");
+        editing = null;
+    }
+
+    // Delete a product from the API and remove it from the table.
+    async function deleteProduct(id){
+        // DELETE asks the API to remove this product.
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+            method : "DELETE",
+        })
+
+        // Remove the product from the local array too.
+        products = products.filter((product) => product.id !== id);
+        renderProducts();
+    }
+
+    // Decide whether the form should add a new product or update an old one.
+    form.addEventListener("submit", (e)=>{
+        // Stop the browser from reloading the page after form submission.
+        e.preventDefault();
+
+        // editing has an ID only when the user clicked an Edit button.
+        if(editing){
+            updateProduct(editing);
+        }
+        else{
+            addProduct(getData());
+        }
+    })
+
+    // Load products as soon as the page opens.
+    getProducts();
+</script>
+</html>

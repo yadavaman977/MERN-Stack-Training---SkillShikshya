@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Product View</title>
+</head>
+<body>
+    <div class="pt-20 flex justify-center">
+        <div id="card" class="w-full max-w-2xl border rounded-md shadow-xl p-8 flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-4xl">Product Details</h1>
+                <button id="back" class="bg-blue-500 px-4 py-2 border-none rounded-md cursor-pointer">Back</button>
+            </div>
+            <img id="image" class="w-40 h-40 m-auto" src="" alt="" />
+            <div class="flex gap-2"><span class="font-bold w-32">ID:</span><span id="id"></span></div>
+            <div class="flex gap-2"><span class="font-bold w-32">Title:</span><span id="title"></span></div>
+            <div class="flex gap-2"><span class="font-bold w-32">Description:</span><span id="description"></span></div>
+            <div class="flex gap-2"><span class="font-bold w-32">Price:</span><span id="price"></span></div>
+            <div class="flex gap-2"><span class="font-bold w-32">Category:</span><span id="category"></span></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const back = document.getElementById("back");
+    back.addEventListener("click", function(){
+        window.location.href = "ProductTable.html";
+    });
+
+    const product = JSON.parse(sessionStorage.getItem("viewProduct"));
+    if(!product){
+        document.getElementById("card").innerHTML = "<p class='text-center text-xl'>No product selected.</p>";
+    } else {
+        document.getElementById("image").src = product.image;
+        document.getElementById("id").textContent = product.id;
+        document.getElementById("title").textContent = product.title;
+        document.getElementById("description").textContent = product.description;
+        document.getElementById("price").textContent = product.price;
+        document.getElementById("category").textContent = product.category;
+    }
+</script>
+</html>

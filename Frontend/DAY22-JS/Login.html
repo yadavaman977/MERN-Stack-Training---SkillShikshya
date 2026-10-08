@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f1f4f9;
+        color: #1f2937;
+      }
+
+      form {
+        display: flex;
+        justify-content: center;
+        padding: 40px 16px;
+      }
+
+      fieldset {
+        width: 100%;
+        max-width: 640px;
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 32px 40px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      legend {
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+        color: #111827;
+      }
+
+      .section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #374151;
+        margin: 28px 0 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .section-title:first-of-type {
+        margin-top: 0;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        font-size: 0.95rem;
+        font-family: inherit;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        background-color: #fff;
+        color: #1f2937;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+
+      input:hover,
+      textarea:hover,
+      select:hover {
+        border-color: #94a3b8;
+      }
+
+      .option-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .option label {
+        margin: 0;
+        font-weight: 400;
+        cursor: pointer;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #2563eb;
+        cursor: pointer;
+      }
+
+      input[type="color"] {
+        width: 60px;
+        height: 38px;
+        padding: 4px;
+        cursor: pointer;
+      }
+
+      input[type="range"] {
+        padding: 0;
+        border: none;
+        accent-color: #2563eb;
+      }
+
+      input[type="file"] {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .hint {
+        font-size: 0.78rem;
+        color: #6b7280;
+        margin-top: 4px;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      button {
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 10px 22px;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: background-color 0.15s ease, transform 0.05s ease;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      button[type="submit"] {
+        background-color: #2563eb;
+        color: #fff;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #1d4ed8;
+      }
+
+      button[type="reset"] {
+        background-color: #fff;
+        color: #374151;
+        border-color: #cbd5e1;
+      }
+
+      button[type="reset"]:hover {
+        background-color: #f3f4f6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="form">
+      <fieldset>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <div class="actions">
+          
+          <button id="submit" type="submit">Login</button>
+        </div>
+
+        <a href="Signup.html">Already have an account? Sign up</a>
+      </fieldset>
+
+    </form>
+  </body>
+   <script>
+     const users = [
+    {
+        _id: 'ab12ex',
+        username: 'Alex',
+        email: 'alex@alex.com',
+        password: '123123',
+        createdAt:'08/01/2020 9:00 AM',
+        isLoggedIn: false
+    },
+    {
+        _id: 'fg12cy',
+        username: 'Asab',
+        email: 'asab@asab.com',
+        password: '123456',
+        createdAt:'08/01/2020 9:30 AM',
+        isLoggedIn: true
+    },
+    {
+        _id: 'zwf8md',
+        username: 'Brook',
+        email: 'brook@brook.com',
+        password: '123111',
+        createdAt:'08/01/2020 9:45 AM',
+        isLoggedIn: true
+    },
+    {
+        _id: 'eefamr',
+        username: 'Martha',
+        email: 'martha@martha.com',
+        password: '123222',
+        createdAt:'08/01/2020 9:50 AM',
+        isLoggedIn: false
+    },
+    {
+        _id: 'ghderc',
+        username: 'Thomas',
+        email: 'thomas@thomas.com',
+        password: '123333',
+        createdAt:'08/01/2020 10:00 AM',
+        isLoggedIn: false
+    }
+    ];
+
+ 
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    
+    const form = document.getElementById('form');
+    
+     form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const user = {
+            email: email.value,
+            password: password.value
+        }
+        if(user.email == "" || user.password == "") {
+            alert("Please fill in all fields");
+        } 
+        else{
+            const foundUser = users.find(u => u.email === user.email && u.password === user.password);
+            if(foundUser) {
+                isLoggedIn = true;
+                console.log(`Login successful for user: ${foundUser.username}, email: ${foundUser.email}`);
+            } else {
+                console.log("Invalid email or password");
+            }
+            console.log(users);
+        }
+    })
+    
+   </script>
+
+  
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javacript</title>
+</head>
+<body>
+<div class="counter">
+    <div class="counter">
+        <button class="button">-</button>
+    <h1 id="counter">0</h1>
+    <button class="button">+</button>
+    <button class="button">Reset</button>
+
+    </div>
+    
+</div>    
+</body>
+
+<script>
+    let count=0
+    const counter = document.getElementById("counter");
+    console.log(counter.innerHTML);
+    function Increment(){
+        count++;
+        counter.textContent = count;
+    }
+
+    function Decrement(){
+        count--;
+        if(count<0){
+            count =0;
+        }
+        counter.textContent = count;
+    }
+    function Reset(){
+        count = 0;
+        counter.textContent = count;
+    }
+</script>
