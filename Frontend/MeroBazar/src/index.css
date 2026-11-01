@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* clerk user button adjust */
+.cl-avatarBox{
+    width: 3rem;
+    height: 3rem;
+}
+
+.Toastify__toast.merobazar-toast {
+    border: 1px solid #fee2e2;
+    border-left: 4px solid #dc2626;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    color: #1f2937;
+    box-shadow: 0 10px 25px rgb(127 29 29 / 12%);
+}
+
+.merobazar-toast .Toastify__toast-icon {
+    color: #dc2626;
+}
+
+.merobazar-toast-body {
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.merobazar-toast .Toastify__close-button {
+    color: #6b7280;
+    opacity: 0.8;
+}
+
+.merobazar-toast .Toastify__close-button:hover {
+    color: #dc2626;
+    opacity: 1;
+}
+
+.Toastify__progress-bar.merobazar-toast-progress {
+    background: #dc2626;
+}
