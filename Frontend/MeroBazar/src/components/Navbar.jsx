@@ -277,7 +277,7 @@ const Navbar = ({
             {/* Clerk authentication */}
             <div className="hidden shrink-0 items-center sm:flex">
               <Show when="signed-out">
-                <SignInButton>
+                <SignInButton mode="modal">
                   <button
                     type="button"
                     className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600"
@@ -401,9 +401,10 @@ const Navbar = ({
 
                 <div className="flex items-center px-3 py-3 sm:hidden">
                   <Show when="signed-out">
-                    <SignInButton>
+                    <SignInButton mode="modal">
                       <button
                         type="button"
+                        onClick={() => setMobileMenuOpen(false)}
                         className="text-sm font-semibold text-red-600"
                       >
                         Sign in

@@ -12,12 +12,20 @@ import { WishlistProvider } from "./context/WishlistContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error(
+    "Missing Clerk publishable key. Set VITE_CLERK_PUBLISHABLE_KEY in your environment."
+  );
+}
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DataProvider>
       <CartProvider>
         <WishlistProvider>
-          <ClerkProvider>
+          <ClerkProvider
+            publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+          >
             <App />
             <ToastContainer
               position="bottom-right"
